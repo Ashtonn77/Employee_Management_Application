@@ -12,21 +12,13 @@ if(isset($_POST['submit'])){
             $homeAddress = $_POST['homeAddress'];
 
             global $connectingDB;
-            $sql = "UPDATE emp_record SET ename='$eName',ssn='$ssn',dept='$dept',salary='$salary',homeaddress='$homeAddress'";
-            $stmt = $connectingDB->prepare($sql);
-            $stmt->bindValue(':enamE', $eName);
-            $stmt->bindValue(':ssN', $ssn);
-            $stmt->bindValue(':depT', $dept);
-            $stmt->bindValue(':salarY', $salary);
-            $stmt->bindValue(':homeaddresS', $homeAddress);
-
+            $sql = "UPDATE emp_record SET ename='$eName', ssn='$ssn', dept='$dept', salary='$salary', homeaddress='$homeAddress' WHERE id='$searchQueryParameter'";
+            $stmt = $connectingDB->query($sql);
+            
             $execute = $stmt->execute();
             if($execute){
-                echo "<span class='success'>Data has been added successfully</span><br>";
-            }else{
-                echo "<span class='fieldHeadingInfo'>Something went wrong:(</span><br>"; //this 'else' should be romoved when error checking
-            }         
-    
+                echo "<script>window.open('view.php?id=Record updated successfully','_self')</script>";
+            }
 }
 ?>
 
@@ -75,7 +67,7 @@ while($dataRows = $stmt->fetch()){
 <span class="fieldInfo">Home Address:</span><br>
 <textarea name="homeAddress" id="" cols="80" rows="8" ><?= $homeAddress?></textarea><br>
 
-<input type="submit" name="submit" class="submitBtn" value="Submit your Record">
+<input type="submit" name="submit" class="submitBtn" value="Update Record">
 
 </fieldset>
 
