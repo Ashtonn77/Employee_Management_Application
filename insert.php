@@ -42,6 +42,7 @@ if(isset($_POST['submit'])){
 <body>
 
 <div class="">
+    <!--add validation for each input field-->
 <form action="insert.php" method="post" class="">
 <fieldset>
 
@@ -65,6 +66,12 @@ if(isset($_POST['submit'])){
 </fieldset>
 
 </form>
+
+<br><br>
+
+<form action="view.php">
+<input type="submit" name="viewBtn" value="View Employee Table" class="submitBtn">
+</form>    
 
 </div>
     
