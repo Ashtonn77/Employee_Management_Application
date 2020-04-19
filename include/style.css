@@ -27,3 +27,9 @@ input[type='text'], textarea{
     font-size: 1.3em;
     font-family: monospace;
 }
+
+.success{
+    color: rgb(13, 238, 88);
+    font-size: 1.3em;
+    font-family: monospace;
+}
