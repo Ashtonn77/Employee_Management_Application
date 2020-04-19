@@ -1,6 +1,5 @@
 <?php
 require_once('include/DB.php');
-
 if(isset($_POST['submit'])){
     if(!empty($_POST['eName']) && !empty($_POST['ssn'])){
             $eName = $_POST['eName'];
@@ -9,14 +8,26 @@ if(isset($_POST['submit'])){
             $salary = $_POST['salary'];
             $homeAddress = $_POST['homeAddress'];
 
-            $connectingDB;
-            $sql = "INSERT INTO emp_record(employee_name,employee_ssn,employee_dept,employee_salary,employee_home_address)";
+            global $connectingDB;
+            $sql = "INSERT INTO emp_record(ename,ssn,dept,salary,homeaddress) VALUES(:enamE,:ssN,:depT,:salarY,:homeaddresS)";//to prevent sql injection(if you look cloesly you'll notice the variables in VALUES are all dummy variables) ->very important
+            $stmt = $connectingDB->prepare($sql);
+            $stmt->bindValue(':enamE', $eName);
+            $stmt->bindValue(':ssN', $ssn);
+            $stmt->bindValue(':depT', $dept);
+            $stmt->bindValue(':salarY', $salary);
+            $stmt->bindValue(':homeaddresS', $homeAddress);
+
+            $execute = $stmt->execute();
+            if($execute){
+                echo "<span class='success'>Data has been added successfully</span><br>";
+            }else{
+                echo "<span class='fieldHeadingInfo'>Something went wrong:(</span><br>"; //this 'else' should be romoved when error checking
+            }            
     }
     else{
-        echo "<span class='fieldHeadingInfo'>Name and Social Security Number is compulsory</span>";
+        echo "<span class='fieldHeadingInfo'>Name and Social Security Number is compulsory</span><br>";
     }
 }
-
 ?>
 
 
