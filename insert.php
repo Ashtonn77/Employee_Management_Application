@@ -42,6 +42,9 @@ if(isset($_POST['submit'])){
 <body>
 
 <div class="">
+
+<h1>Insert employee details below:</h1>
+
     <!--add validation for each input field-->
 <form action="insert.php" method="post" class="">
 <fieldset>
